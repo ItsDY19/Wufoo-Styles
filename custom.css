@@ -1,129 +1,212 @@
-/* - - - - - - - - - - - - - - - - - - - - -
+/* ================================
+   ASU Wufoo – Modern Friendly v2
+   Primary: #163269
+   ================================ */
 
- Title : 
- Author : 
- URL : http://
+:root{
+  --asu: #163269;
+  --asu-10: rgba(22,50,105,.10);
+  --asu-08: rgba(22,50,105,.08);
+  --asu-06: rgba(22,50,105,.06);
+  --border: #d9e1ef;
+  --text: #0f1f33;
+  --muted: #51627a;
+  --bg: #ffffff;
+}
 
- Last Updated : 
+/* Fix overflow + make sizing predictable (THIS fixes the long fields issue) */
+.wufoo, .wufoo * { box-sizing: border-box; }
 
-- - - - - - - - - - - - - - - - - - - - - */
-
-/* ===== MAIN FORM CARD ===== */
-.wufoo {
+/* Card */
+.wufoo{
   max-width: 920px;
-  margin: 25px auto;
-  background: #ffffff;
-  padding: 28px;
+  margin: 26px auto;
+  background: var(--bg);
+  padding: 28px 28px 18px;
   border-radius: 16px;
-  box-shadow: 0 12px 34px rgba(22,50,105,0.08);
-  font-family: 'Inter', Arial, sans-serif;
+  box-shadow: 0 14px 40px rgba(22,50,105,0.10);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
 }
 
-/* ===== HEADER ===== */
-.wufoo #header {
+/* Remove Wufoo default list spacing */
+.wufoo ul{ margin: 0; padding: 0; }
+.wufoo li{ list-style: none; margin: 0 0 14px; }
+
+/* Header */
+.wufoo #header{
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(22,50,105,.18);
 }
-
-.wufoo #header h2 {
-  color: #163269;
+.wufoo #header h2{
+  color: var(--asu);
   font-size: 24px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  margin: 0 0 6px;
+}
+.wufoo #header div{
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Labels */
+.wufoo label.desc{
+  display:block;
   font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px;
 }
+.wufoo .req{ color: #d64545; }
 
-.wufoo #header div {
-  color: #4a5b7a;
-  font-size: 15px;
-}
-
-/* ===== SECTION TITLES ===== */
-.wufoo .section h3 {
-  background: rgba(22,50,105,.06);
-  padding: 14px;
-  border-radius: 10px;
-  font-size: 17px;
-  color: #163269;
-  border-left: 5px solid #163269;
-}
-
-/* ===== LABELS ===== */
-.wufoo label.desc {
-  font-weight: 600;
-  color: #163269;
-  margin-bottom: 6px;
-}
-
-/* ===== INPUTS ===== */
+/* Inputs / Selects / Textareas */
 .wufoo input.field,
-.wufoo select.field {
-  background: #fafbfd;
-  border: 1px solid #d9e1ef;
+.wufoo select.field,
+.wufoo textarea.field,
+.wufoo input[type="text"],
+.wufoo input[type="email"],
+.wufoo input[type="tel"],
+.wufoo textarea{
+  width: 100%;
+  max-width: 100%;
+  background: #fbfcff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 12px 14px;
-  border-radius: 10px;
   font-size: 15px;
-  transition: all .2s ease;
+  line-height: 1.2;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
 
-/* Focus state */
+/* Selects look nicer */
+.wufoo select.field{
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+/* Focus */
 .wufoo input.field:focus,
-.wufoo select.field:focus {
-  border-color: #163269;
-  box-shadow: 0 0 0 4px rgba(22,50,105,.16);
+.wufoo select.field:focus,
+.wufoo textarea:focus{
+  outline: none;
+  border-color: var(--asu);
   background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(22,50,105,.16);
 }
 
-/* ===== RADIO & CHECKBOX ===== */
-.wufoo .choice {
-  background: rgba(22,50,105,.05);
-  padding: 9px 11px;
-  border-radius: 8px;
-  margin: 4px;
-  transition: all .2s ease;
+/* Small helper labels (First/Last, DD/MM/YYYY etc.) */
+.wufoo span > label,
+.wufoo .symbol,
+.wufoo .instruct,
+.wufoo #instruct1327{
+  color: var(--muted);
+  font-size: 12px;
 }
 
-.wufoo .choice:hover {
-  background: rgba(22,50,105,.09);
+/* Date fields a bit tighter */
+.wufoo .date input.field.text{
+  min-width: 70px;
+  width: 70px;
+  text-align: center;
+  padding: 10px 10px;
+  border-radius: 12px;
+}
+.wufoo .date .symbol{ padding: 0 6px; font-weight: 700; }
+
+/* Section headers (the grey blocks) */
+.wufoo .section h3{
+  background: rgba(22,50,105,.06);
+  padding: 14px 14px;
+  border-radius: 12px;
+  color: var(--asu);
+  font-size: 16px;
+  font-weight: 800;
+  border-left: 6px solid var(--asu);
+  margin: 6px 0 2px;
 }
 
-/* ===== REQUIRED STAR ===== */
-.wufoo .req {
-  color: #d64545;
+/* Checkbox / radio pill styling */
+.wufoo input.field.radio,
+.wufoo input.field.checkbox{
+  accent-color: var(--asu); /* modern browsers */
 }
 
-/* ===== SUBMIT BUTTON ===== */
-.wufoo .buttons input {
-  background: #163269;
-  color: white;
-  padding: 13px 26px;
+.wufoo label.choice{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(22,50,105,.16);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 6px 10px 0 0;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .12s ease;
+}
+
+.wufoo label.choice:hover{
+  border-color: rgba(22,50,105,.35);
+  transform: translateY(-1px);
+}
+
+/* Selected state (input sits immediately before label in your markup) */
+.wufoo input[type="radio"]:checked + label.choice,
+.wufoo input[type="checkbox"]:checked + label.choice{
+  background: var(--asu-06);
+  border-color: rgba(22,50,105,.45);
+}
+
+/* Long checkbox rows (GED etc.) feel like cards */
+.wufoo .notStacked label.choice{
+  width: 100%;
+  margin-right: 0;
+}
+
+/* Textareas */
+.wufoo textarea{
+  min-height: 160px;
+  resize: vertical;
+}
+
+/* File upload (keep simple but cleaner) */
+.wufoo input[type="file"]{
+  border: 1px dashed rgba(22,50,105,.30);
+  background: rgba(22,50,105,.04);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+/* Submit button */
+.wufoo .buttons{
+  margin-top: 10px;
+  padding-top: 10px;
+}
+.wufoo .buttons input{
+  background: var(--asu);
+  color: #fff;
   border: none;
-  border-radius: 30px;
-  font-weight: 600;
-  letter-spacing: .4px;
-  transition: all .25s ease;
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: .2px;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(22,50,105,.22);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
-
-.wufoo .buttons input:hover {
+.wufoo .buttons input:hover{
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(22,50,105,.25);
+  box-shadow: 0 14px 28px rgba(22,50,105,.28);
+  filter: brightness(1.03);
 }
 
-/* ===== FIELD GROUP SPACING ===== */
-.wufoo li {
-  margin-bottom: 12px;
-}
-
-/* ===== MOBILE OPTIMIZED ===== */
-@media (max-width: 768px) {
-  .wufoo {
-    padding: 18px;
-  }
-
-  .wufoo input.field,
-  .wufoo select.field {
-    font-size: 16px;
-  }
-
-  .wufoo .section h3 {
-    font-size: 16px;
-  }
+/* Mobile */
+@media (max-width: 768px){
+  .wufoo{ padding: 18px 16px 12px; }
+  .wufoo #header h2{ font-size: 20px; }
+  .wufoo label.choice{ width: 100%; margin-right: 0; }
+  .wufoo .buttons input{ width: 100%; }
 }
