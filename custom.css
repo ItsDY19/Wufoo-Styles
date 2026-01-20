@@ -210,3 +210,164 @@
   .wufoo label.choice{ width: 100%; margin-right: 0; }
   .wufoo .buttons input{ width: 100%; }
 }
+
+/* =========================================
+   FIX PACK: keep sub-fields on ONE LINE
+   + make radio/checkbox look normal
+   ========================================= */
+
+/* 1) Stop sub-field helper labels from forcing new lines */
+.wufoo span > label{
+  display: inline !important;
+  margin: 0 !important;
+  font-size: 12px;
+  color: #51627a;
+}
+
+/* 2) DATE fields: keep DD / MM / YYYY on one line */
+.wufoo li.date span,
+.wufoo li.date .symbol,
+.wufoo li.date #cal22,
+.wufoo li.date #cal43,
+.wufoo li.date #cal44,
+.wufoo li.date #cal895,
+.wufoo li.date #cal896,
+.wufoo li.date #cal1103,
+.wufoo li.date #cal1104{
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.wufoo li.date span{
+  margin-right: 8px !important;
+}
+
+.wufoo li.date input{
+  width: 72px !important;
+  min-width: 72px !important;
+  text-align: center;
+}
+
+/* 3) TIME fields: keep HH / MM / SS / AMPM on one line */
+.wufoo li.time span,
+.wufoo li.time select{
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.wufoo li.time span{
+  margin-right: 8px !important;
+}
+
+.wufoo li.time input{
+  width: 72px !important;
+  min-width: 72px !important;
+  text-align: center;
+}
+
+/* 4) PHONE fields: keep phone parts on one line */
+.wufoo li.phone span{
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-right: 10px !important;
+}
+.wufoo li.phone input{
+  width: 90px !important;
+  min-width: 90px !important;
+  text-align: center;
+}
+
+/* 5) CURRENCY fields: keep dollars + cents on one line */
+.wufoo li.money span,
+.wufoo li.money input{
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+.wufoo li.money input{
+  width: 120px !important;
+  min-width: 120px !important;
+}
+
+/* =========================================
+   RADIO/CHECKBOX: make them look like clean
+   left-aligned options (NOT far right)
+   ========================================= */
+
+/* Wufoo often wraps each option like: <span><input> <label class="choice">...</label></span> */
+.wufoo fieldset > div > span{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 6px 10px 6px 0 !important;
+}
+
+/* Make the label pill (simple + consistent) */
+.wufoo label.choice{
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 10px 12px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(22,50,105,.18) !important;
+  background: #fff !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+}
+
+/* Selected state */
+.wufoo input[type="radio"]:checked + label.choice,
+.wufoo input[type="checkbox"]:checked + label.choice{
+  background: rgba(22,50,105,.06) !important;
+  border-color: rgba(22,50,105,.45) !important;
+}
+
+/* Make long checkbox lines not look weird */
+.wufoo .notStacked fieldset > div > span{
+  display: flex !important;
+  width: 100% !important;
+}
+.wufoo .notStacked label.choice{
+  width: 100% !important;
+}
+
+/* =========================================
+   MATRIX / LIKERT fields (the “radio far right” issue)
+   This forces them into a normal stacked list
+   ========================================= */
+
+/* Common Wufoo matrix/likert selectors */
+.wufoo table.likert,
+.wufoo table.likert tbody,
+.wufoo table.likert tr,
+.wufoo table.matrix,
+.wufoo table.matrix tbody,
+.wufoo table.matrix tr{
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Each row becomes a flex row: label + option */
+.wufoo table.likert tr,
+.wufoo table.matrix tr{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(22,50,105,.08) !important;
+}
+
+.wufoo table.likert td,
+.wufoo table.matrix td,
+.wufoo table.likert th,
+.wufoo table.matrix th{
+  display: block !important;
+  width: auto !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Hide matrix header row if it’s making things ugly */
+.wufoo table.likert thead,
+.wufoo table.matrix thead{
+  display: none !important;
+}
