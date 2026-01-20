@@ -371,3 +371,111 @@
 .wufoo table.matrix thead{
   display: none !important;
 }
+
+/* =========================================
+   CLEAN CHOICES: make radios/checkboxes
+   look like modern clickable cards
+   ========================================= */
+
+/* hide the tiny default dots/squares */
+.wufoo input[type="radio"],
+.wufoo input[type="checkbox"]{
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* each choice row becomes a clean grid */
+.wufoo fieldset > div{
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+  gap: 14px 18px !important;
+  margin-top: 10px !important;
+}
+
+/* each option wrapper */
+.wufoo fieldset > div > span{
+  display: block !important;
+  margin: 0 !important;
+}
+
+/* the label becomes the “button/card” */
+.wufoo label.choice{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 56px !important;
+  width: 100% !important;
+
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(22,50,105,.18) !important;
+  background: #fff !important;
+
+  font-weight: 650 !important;
+  color: #163269 !important;
+
+  box-shadow: 0 8px 18px rgba(22,50,105,.06) !important;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+}
+
+/* hover */
+.wufoo label.choice:hover{
+  transform: translateY(-1px) !important;
+  border-color: rgba(22,50,105,.35) !important;
+  box-shadow: 0 12px 24px rgba(22,50,105,.10) !important;
+  background: rgba(22,50,105,.03) !important;
+}
+
+/* selected state: when input is checked, style its label */
+.wufoo input[type="radio"]:checked + label.choice,
+.wufoo input[type="checkbox"]:checked + label.choice{
+  background: rgba(22,50,105,.08) !important;
+  border-color: rgba(22,50,105,.55) !important;
+  box-shadow: 0 12px 26px rgba(22,50,105,.16) !important;
+}
+
+/* add a custom indicator dot/square on the left */
+.wufoo label.choice::before{
+  content: "";
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;               /* default: radio dot */
+  border: 2px solid rgba(22,50,105,.35);
+  background: #fff;
+  margin-right: 12px;
+}
+
+/* checked indicator fill */
+.wufoo input[type="radio"]:checked + label.choice::before{
+  border-color: #163269;
+  box-shadow: inset 0 0 0 5px #163269;
+}
+
+/* if it's a checkbox group, make it square */
+.wufoo .checkbox label.choice::before,
+.wufoo li.checkbox label.choice::before{
+  border-radius: 6px;
+}
+
+/* checked square */
+.wufoo input[type="checkbox"]:checked + label.choice::before{
+  border-color: #163269;
+  background: #163269;
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* GED + long checkbox text should not be a tiny centered box */
+.wufoo .notStacked fieldset > div{
+  grid-template-columns: 1fr !important;
+}
+
+/* Mobile: stack to 1 column */
+@media (max-width: 760px){
+  .wufoo fieldset > div{
+    grid-template-columns: 1fr !important;
+  }
+}
