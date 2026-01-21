@@ -479,3 +479,82 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* =====================================
+   GENDER RADIO FIX (Field9 + Field1352)
+   ===================================== */
+
+/* Hide native radio for these gender groups */
+.wufoo input[name="Field9"],
+.wufoo input[name="Field1352"]{
+  position: absolute !important;
+  opacity: 0 !important;
+}
+
+/* Base pill style */
+.wufoo input[name="Field9"] + label.choice,
+.wufoo input[name="Field1352"] + label.choice{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+
+  min-width: 160px !important;
+  height: 56px !important;
+
+  padding: 0 18px !important;
+  border-radius: 14px !important;
+
+  border: 2px solid rgba(22,50,105,.25) !important;
+  background: #fff !important;
+
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #163269 !important;
+
+  transition: all .15s ease !important;
+  margin-right: 22px !important;
+}
+
+/* Custom dot */
+.wufoo input[name="Field9"] + label.choice::before,
+.wufoo input[name="Field1352"] + label.choice::before{
+  content: "" !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 999px !important;
+  border: 2px solid rgba(22,50,105,.35) !important;
+  background: #fff !important;
+  flex-shrink: 0 !important;
+}
+
+/* Checked pill */
+.wufoo input[name="Field9"]:checked + label.choice,
+.wufoo input[name="Field1352"]:checked + label.choice{
+  background: rgba(22,50,105,.08) !important;
+  border-color: #163269 !important;
+  box-shadow: 0 10px 22px rgba(22,50,105,.20) !important;
+}
+
+/* Checked dot */
+.wufoo input[name="Field9"]:checked + label.choice::before,
+.wufoo input[name="Field1352"]:checked + label.choice::before{
+  border-color: #163269 !important;
+  box-shadow: inset 0 0 0 5px #163269 !important;
+}
+
+/* Hover */
+.wufoo input[name="Field9"] + label.choice:hover,
+.wufoo input[name="Field1352"] + label.choice:hover{
+  border-color: rgba(22,50,105,.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Mobile stack */
+@media (max-width: 600px){
+  .wufoo input[name="Field9"] + label.choice,
+  .wufoo input[name="Field1352"] + label.choice{
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 12px !important;
+  }
+}
