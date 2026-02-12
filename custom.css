@@ -148,7 +148,6 @@
 
 /* =========================================
    CHOICE CARDS (Radios + Checkboxes)
-   IMPORTANT: scoped ONLY to Wufoo choice list items
    ========================================= */
 
 /* Hide native controls ONLY inside choice list items */
@@ -161,7 +160,7 @@
   overflow: hidden !important;
 }
 
-/* Default choice layout (safe): wrap cards nicely */
+/* Default choice layout */
 .wufoo li fieldset > div{
   display: flex;
   flex-wrap: wrap;
@@ -237,42 +236,47 @@
 }
 
 /* =========================================
-   TARGETED FIXES
+   DESKTOP SPECIFIC LAYOUTS
    ========================================= */
+@media (min-width: 821px) {
+  /* Gender (2 options) */
+  .wufoo #fo1li9 fieldset > div > span,
+  .wufoo #fo1li1352 fieldset > div > span{
+    flex: 0 0 180px;
+    max-width: 180px;
+  }
 
-/* Gender (2 options) */
-.wufoo #fo1li9 fieldset > div > span,
-.wufoo #fo1li1352 fieldset > div > span{
-  flex: 0 0 180px;
-}
+  /* This Application is For (3 options) */
+  .wufoo #fo1li1598 fieldset > div > span{
+    flex: 1 1 calc(33.333% - 18px);
+    min-width: 180px;
+    max-width: calc(33.333% - 18px);
+  }
+  .wufoo #fo1li1598 label.choice{
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+  }
 
-/* This Application is For (3 options) */
-.wufoo #fo1li1598 fieldset > div > span{
-  flex: 1 1 calc(33.333% - 18px);
-  min-width: 180px;
-}
-.wufoo #fo1li1598 label.choice{
-  justify-content: center;
-  text-align: center;
-  white-space: normal;
-  word-break: break-word;
-}
+  /* “Where did you hear about ASU?” keep it clean 2-column */
+  .wufoo #fo1li1356 fieldset > div > span{
+    flex: 1 1 calc(50% - 18px);
+    min-width: 220px;
+    max-width: calc(50% - 18px);
+  }
 
-/* “Where did you hear about ASU?” keep it clean 2-column */
-.wufoo #fo1li1356 fieldset > div > span{
-  flex: 1 1 calc(50% - 18px);
-  min-width: 220px;
-}
-
-/* Yes/No questions (notStacked items): keep answers close + aligned */
-.wufoo li.notStacked fieldset > div > span,
-.wufoo li.notStacked fieldset > div > .subfield{
-  flex: 0 0 180px;
-  min-width: 160px;
+  /* Yes/No questions (notStacked items): keep answers close + aligned */
+  .wufoo li.notStacked fieldset > div > span,
+  .wufoo li.notStacked fieldset > div > .subfield{
+    flex: 0 0 180px;
+    min-width: 160px;
+    max-width: 180px;
+  }
 }
 
 /* =========================================
-   Buttons
+   BUTTONS
    ========================================= */
 .wufoo .buttons{
   margin-top: 10px;
@@ -298,47 +302,37 @@
 }
 
 /* =========================================
-   MOBILE OPTIMIZATION - iPhone 15 Pro and smaller
-   Breakpoint changed from 768px to 900px for better coverage
+   MOBILE FIXES - iPhone & All Mobile Devices
+   This targets everything under 820px (iPad mini and below)
    ========================================= */
-@media (max-width: 900px){
-  /* Reduce container padding */
-  .wufoo{ 
-    padding: 20px 16px 16px; 
-    margin: 16px auto;
+@media (max-width: 820px) {
+  /* Container adjustments */
+  .wufoo { 
+    padding: 20px 16px; 
+    margin: 12px auto;
     border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(22,50,105,0.08);
   }
   
-  /* Smaller header */
-  .wufoo #header h2{ 
+  .wufoo #header h2 { 
     font-size: 22px; 
   }
   
-  /* FULL WIDTH - Force ALL choice cards to stack vertically */
+  .wufoo #header div { 
+    font-size: 13px; 
+  }
+  
+  /* COMPLETELY RESET ALL CHOICE LAYOUTS FOR MOBILE */
   .wufoo li fieldset > div {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  /* Make every option wrapper full width */
-  .wufoo li fieldset > div > span,
-  .wufoo li fieldset > div > .subfield {
-    flex: 1 1 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
     width: 100% !important;
-    margin-bottom: 0 !important;
   }
   
-  /* Make cards full width with better touch targets */
-  .wufoo label.choice {
-    width: 100%;
-    min-height: 60px; /* Larger touch target for mobile */
-    padding: 16px 18px;
-  }
-  
-  /* Override ALL specific selectors for mobile - force full width */
+  /* Force every single option to be full width */
+  .wufoo li fieldset > div > span,
+  .wufoo li fieldset > div > .subfield,
   .wufoo #fo1li9 fieldset > div > span,
   .wufoo #fo1li1352 fieldset > div > span,
   .wufoo #fo1li1598 fieldset > div > span,
@@ -346,23 +340,35 @@
   .wufoo li.notStacked fieldset > div > span,
   .wufoo li.notStacked fieldset > div > .subfield {
     flex: 1 1 100% !important;
+    width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
-    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   
-  /* Center text for the Application For options on mobile */
+  /* Make cards full width with better touch targets */
+  .wufoo label.choice {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 60px;
+    padding: 16px 18px;
+    font-size: 16px;
+  }
+  
+  /* Center text for Application For on mobile */
   .wufoo #fo1li1598 label.choice {
     justify-content: center;
     text-align: center;
   }
   
-  /* Make date fields more mobile-friendly */
+  /* Fix date fields on mobile */
   .wufoo li.date span {
     display: flex !important;
     flex-wrap: wrap;
     gap: 8px;
     width: 100%;
+    margin-right: 0 !important;
   }
   
   .wufoo li.date input {
@@ -371,37 +377,64 @@
     flex: 1 1 auto;
   }
   
+  /* Fix name fields (Given Name/Surname) on mobile */
+  .wufoo li.focused input.field,
+  .wufoo li.focused .field {
+    width: 100% !important;
+  }
+  
+  /* Better spacing for complex fields */
+  .wufoo li.complex fieldset > div {
+    flex-direction: column;
+  }
+  
   /* Full width button */
   .wufoo .buttons input { 
     width: 100%; 
     padding: 16px 20px;
+    font-size: 17px;
   }
 }
 
 /* =========================================
-   EXTRA SMALL DEVICES (iPhone 5/SE, old phones)
+   SMALL MOBILE (iPhone 15 Pro, iPhone 13/14/15 etc)
+   390px and below
    ========================================= */
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   .wufoo { 
     padding: 16px 14px; 
-    margin: 12px auto;
+    margin: 8px auto;
   }
   
   .wufoo #header h2 { 
     font-size: 20px; 
   }
   
-  /* Even smaller date fields for very narrow screens */
+  /* Make date fields stack vertically on very small screens */
   .wufoo li.date input {
     width: 100% !important;
   }
   
   .wufoo li.date span {
     flex-direction: column;
+    gap: 6px;
   }
   
-  /* Reduce card padding for very small screens */
+  /* Slightly smaller card padding */
   .wufoo label.choice {
     padding: 14px;
+    min-height: 56px;
+  }
+}
+
+/* =========================================
+   FIX FOR GENDER AND YES/NO QUESTIONS
+   These specifically need to stack vertically
+   ========================================= */
+@media (max-width: 820px) {
+  .wufoo #fo1li9 fieldset > div,
+  .wufoo #fo1li1352 fieldset > div,
+  .wufoo li.notStacked fieldset > div {
+    flex-direction: column !important;
   }
 }
