@@ -324,3 +324,54 @@
 
   .wufoo .buttons input{ width: 100%; }
 }
+
+
+/* =========================================
+   RESPONSIVE FIX: Prevent "This Application is For"
+   spilling out on portrait/mobile
+   ========================================= */
+
+/* Always keep the choices inside the form */
+.wufoo,
+.wufoo form,
+.wufoo ul,
+.wufoo li,
+.wufoo fieldset,
+.wufoo fieldset > div{
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Make the "This Application is For" grid safe (no overflow) */
+.wufoo #fo1li1598 fieldset > div{
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* minmax(0,1fr) prevents spill */
+}
+
+/* Ensure each option stays inside the grid cell */
+.wufoo #fo1li1598 fieldset > div > span,
+.wufoo #fo1li1598 label.choice{
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Allow the label text to wrap */
+.wufoo #fo1li1598 label.choice{
+  white-space: normal !important;
+  word-break: break-word !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 900px){
+  .wufoo #fo1li1598 fieldset > div{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Phone portrait: 1 column (so you ALWAYS see Transfer) */
+@media (max-width: 600px), (orientation: portrait){
+  .wufoo #fo1li1598 fieldset > div{
+    grid-template-columns: 1fr !important;
+  }
+}
