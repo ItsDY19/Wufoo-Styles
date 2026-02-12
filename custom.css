@@ -438,3 +438,68 @@
     flex-direction: column !important;
   }
 }
+
+/* =========================================
+   SIMPLE MOBILE STACK - One thing at a time, line by line
+   ========================================= */
+@media (max-width: 768px) {
+  /* Force EVERY fieldset div to stack vertically */
+  .wufoo li fieldset > div {
+    display: block !important;
+  }
+  
+  /* Force EVERY choice option to be full width and block level */
+  .wufoo li fieldset > div > span,
+  .wufoo li fieldset > div > .subfield {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    float: none !important;
+    clear: both !important;
+    margin: 0 0 12px 0 !important;
+  }
+  
+  /* Make each card take full width */
+  .wufoo label.choice {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Date fields - one line at a time */
+  .wufoo li.date span {
+    display: block !important;
+  }
+  
+  .wufoo li.date input {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Name fields - First name above Last name */
+  .wufoo li.complex fieldset > div {
+    display: block !important;
+  }
+  
+  .wufoo li.complex span {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Kill any flex, grid, or inline behavior */
+  .wufoo li fieldset > div,
+  .wufoo li.complex fieldset > div,
+  .wufoo li.notStacked fieldset > div,
+  .wufoo li.date fieldset > div,
+  .wufoo #fo1li9 fieldset > div,
+  .wufoo #fo1li1352 fieldset > div,
+  .wufoo #fo1li1598 fieldset > div,
+  .wufoo #fo1li1356 fieldset > div {
+    display: block !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
+    gap: unset !important;
+  }
+}
