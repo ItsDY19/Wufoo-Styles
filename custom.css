@@ -599,3 +599,16 @@
   min-width: 200px !important;   /* Application is For pill width */
   width: auto !important;
 }
+.wufoo #fo1li1598 fieldset > div{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(180px, 1fr)) !important;
+  gap: 14px !important;
+}
+.wufoo #fo1li1598 fieldset > div > span{
+  width: 100% !important;
+  display: block !important;
+}
+.wufoo #fo1li1598 label.choice{
+  width: 100% !important;
+  min-width: 0 !important;
+}
