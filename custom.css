@@ -415,3 +415,31 @@
   }
 }
 
+@media (max-width: 820px){
+
+
+  .wufoo { overflow-x: visible !important; } /* or remove overflow-x:hidden entirely */
+  
+  /* Make sure the choice container cannot exceed the form width */
+  .wufoo li fieldset,
+  .wufoo li fieldset > div{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Wufoo sometimes uses floats/widths on these spans — kill them on mobile */
+  .wufoo li fieldset > div > span,
+  .wufoo li fieldset > div > .subfield{
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Ensure the card itself never overflows */
+  .wufoo label.choice{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
