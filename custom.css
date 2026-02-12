@@ -375,3 +375,71 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ===========================
+   PATCH: STOP SCROLLBARS + FIX SPILLING
+   (place at VERY BOTTOM)
+   =========================== */
+
+/* 1) Kill any accidental internal scrolling on Wufoo choice containers */
+.wufoo fieldset,
+.wufoo fieldset > div,
+.wufoo fieldset > div > span{
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* 2) ONLY style choice layouts for radio/checkbox list items (not every fieldset on the form) */
+.wufoo li.radio fieldset > div,
+.wufoo li.checkbox fieldset > div{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px 18px !important;
+  align-items: stretch !important;
+}
+
+/* Each option wrapper becomes a flexible card */
+.wufoo li.radio fieldset > div > span,
+.wufoo li.checkbox fieldset > div > span{
+  display: block !important;
+  flex: 1 1 220px !important; /* auto-wrap */
+  min-width: 160px !important;
+}
+
+/* 3) Don’t hide EVERY radio/checkbox on the form — only hide the ones inside choice lists */
+.wufoo li.radio input[type="radio"],
+.wufoo li.checkbox input[type="checkbox"]{
+  position: absolute !important;
+  opacity: 0 !important;
+}
+
+/* Make labels the clickable cards */
+.wufoo li.radio label.choice,
+.wufoo li.checkbox label.choice{
+  width: 100% !important;
+  min-height: 56px !important;
+  box-sizing: border-box !important;
+}
+
+/* 4) “This Application is For” — force 3 cards across on desktop, wrap nicely */
+.wufoo #fo1li1598 fieldset > div > span{
+  flex: 1 1 calc(33.333% - 18px) !important;
+  min-width: 160px !important;
+}
+
+/* 5) Gender — keep it 2 across */
+.wufoo #fo1li9 fieldset > div > span,
+.wufoo #fo1li1352 fieldset > div > span{
+  flex: 0 0 180px !important;
+}
+
+/* 6) Mobile portrait — stack everything so nothing gets cut off */
+@media (max-width: 600px){
+  .wufoo #fo1li1598 fieldset > div > span,
+  .wufoo #fo1li9 fieldset > div > span,
+  .wufoo #fo1li1352 fieldset > div > span{
+    flex: 1 1 100% !important;
+    min-width: 0 !important;
+  }
+}
