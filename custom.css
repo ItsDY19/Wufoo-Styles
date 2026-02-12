@@ -559,14 +559,16 @@
   }
 }
 
-/* =====================================
-   FIX: "This Application is For" (Field 5)
-   Stops options from spreading far apart
-   ===================================== */
+/* =========================================
+   FIX: Keep Gender + "This Application is For"
+   options together (not pushed far right)
+   Targets: #fo1li9, #fo1li1352, #fo1li1598
+   ========================================= */
 
-/* Override your global grid for this one field */
-.wufoo #foli5 fieldset > div,
-.wufoo li.rightHalf#foli5 fieldset > div{
+/* 1) Override your global grid layout for these fields only */
+.wufoo #fo1li9 fieldset > div,
+.wufoo #fo1li1352 fieldset > div,
+.wufoo #fo1li1598 fieldset > div{
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: flex-start !important;
@@ -574,9 +576,10 @@
   gap: 14px !important;
 }
 
-/* Prevent the option wrappers from stretching */
-.wufoo #foli5 fieldset > div > span,
-.wufoo li.rightHalf#foli5 fieldset > div > span{
+/* 2) Stop Wufoo option wrappers from stretching */
+.wufoo #fo1li9 fieldset > div > span,
+.wufoo #fo1li1352 fieldset > div > span,
+.wufoo #fo1li1598 fieldset > div > span{
   width: auto !important;
   min-width: 0 !important;
   margin: 0 !important;
@@ -585,10 +588,14 @@
   align-items: center !important;
 }
 
-/* Keep each option pill a consistent size so they sit together */
-.wufoo #foli5 label.choice,
-.wufoo li.rightHalf#foli5 label.choice{
+/* 3) Keep the “pill/card” widths consistent so they sit side-by-side */
+.wufoo #fo1li9 label.choice,
+.wufoo #fo1li1352 label.choice{
+  min-width: 180px !important;   /* Gender pill width */
   width: auto !important;
-  min-width: 180px !important;  /* adjust if you want */
-  margin: 0 !important;
+}
+
+.wufoo #fo1li1598 label.choice{
+  min-width: 200px !important;   /* Application is For pill width */
+  width: auto !important;
 }
