@@ -558,3 +558,37 @@
     margin-bottom: 12px !important;
   }
 }
+
+/* =====================================
+   FIX: "This Application is For" (Field 5)
+   Stops options from spreading far apart
+   ===================================== */
+
+/* Override your global grid for this one field */
+.wufoo #foli5 fieldset > div,
+.wufoo li.rightHalf#foli5 fieldset > div{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+/* Prevent the option wrappers from stretching */
+.wufoo #foli5 fieldset > div > span,
+.wufoo li.rightHalf#foli5 fieldset > div > span{
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  float: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Keep each option pill a consistent size so they sit together */
+.wufoo #foli5 label.choice,
+.wufoo li.rightHalf#foli5 label.choice{
+  width: auto !important;
+  min-width: 180px !important;  /* adjust if you want */
+  margin: 0 !important;
+}
