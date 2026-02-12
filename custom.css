@@ -565,16 +565,7 @@
    Targets: #fo1li9, #fo1li1352, #fo1li1598
    ========================================= */
 
-/* 1) Override your global grid layout for these fields only */
-.wufoo #fo1li9 fieldset > div,
-.wufoo #fo1li1352 fieldset > div,
-.wufoo #fo1li1598 fieldset > div{
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-  gap: 14px !important;
-}
+
 
 /* 2) Stop Wufoo option wrappers from stretching */
 .wufoo #fo1li9 fieldset > div > span,
@@ -588,12 +579,6 @@
   align-items: center !important;
 }
 
-/* 3) Keep the “pill/card” widths consistent so they sit side-by-side */
-.wufoo #fo1li9 label.choice,
-.wufoo #fo1li1352 label.choice{
-  min-width: 180px !important;   /* Gender pill width */
-  width: auto !important;
-}
 
 .wufoo #fo1li1598 label.choice{
   min-width: 200px !important;   /* Application is For pill width */
@@ -608,6 +593,47 @@
   width: 100% !important;
   display: block !important;
 }
+.wufoo #fo1li1598 label.choice{
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* =========================================
+   FINAL FIX: Gender (fo1li9 + fo1li1352)
+   and "This Application is For" (fo1li1598)
+   ========================================= */
+
+/* --- GENDER: keep 2 pills together --- */
+.wufoo #fo1li9 fieldset > div,
+.wufoo #fo1li1352 fieldset > div{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.wufoo #fo1li9 fieldset > div > span,
+.wufoo #fo1li1352 fieldset > div > span{
+  width: auto !important;
+  display: inline-flex !important;
+  margin: 0 !important;
+}
+
+/* --- THIS APPLICATION IS FOR: force 3 across --- */
+.wufoo #fo1li1598 fieldset > div{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(160px, 1fr)) !important;
+  gap: 14px !important;
+  justify-content: start !important;
+}
+
+.wufoo #fo1li1598 fieldset > div > span{
+  width: 100% !important;
+  display: block !important;
+  margin: 0 !important;
+}
+
 .wufoo #fo1li1598 label.choice{
   width: 100% !important;
   min-width: 0 !important;
