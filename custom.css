@@ -176,6 +176,7 @@
   max-width: 160px;
   margin: 0 !important;
   margin-bottom: 10px !important;
+  font-size: x-small;
 }
 
 /* Card label */
@@ -380,3 +381,37 @@
     width: 100% !important;
   }
 }
+
+/* FORCE Wufoo column LIs to stack on mobile */
+@media (max-width: 820px){
+
+  /* Any Wufoo "column" list item becomes full width */
+  .wufoo li.leftHalf,
+  .wufoo li.rightHalf,
+  .wufoo li.third,
+  .wufoo li.twoColumns,
+  .wufoo li.threeColumns,
+  .wufoo li.oneThird,
+  .wufoo li.twoThirds,
+  .wufoo li.full,
+  .wufoo li[class*="half"],
+  .wufoo li[class*="third"],
+  .wufoo li[class*="Column"]{
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    clear: both !important;
+  }
+
+  /* Also kill any inline-block behavior inside those rows */
+  .wufoo li.leftHalf div,
+  .wufoo li.rightHalf div,
+  .wufoo li.third div,
+  .wufoo li.twoColumns div,
+  .wufoo li.threeColumns div{
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
