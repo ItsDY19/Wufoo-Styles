@@ -1,23 +1,25 @@
-/* ================================
-   ASU Wufoo – Modern Friendly v2
+/* =========================================
+   ASU Wufoo – Clean Modern Theme (No Redundancy)
    Primary: #163269
-   ================================ */
+   ========================================= */
 
 :root{
   --asu: #163269;
+  --asu-16: rgba(22,50,105,.16);
   --asu-10: rgba(22,50,105,.10);
   --asu-08: rgba(22,50,105,.08);
   --asu-06: rgba(22,50,105,.06);
+
   --border: #d9e1ef;
   --text: #0f1f33;
   --muted: #51627a;
   --bg: #ffffff;
 }
 
-/* Fix overflow + make sizing predictable (THIS fixes the long fields issue) */
+/* Predictable sizing */
 .wufoo, .wufoo * { box-sizing: border-box; }
 
-/* Card */
+/* Container Card */
 .wufoo{
   max-width: 920px;
   margin: 26px auto;
@@ -29,7 +31,7 @@
   color: var(--text);
 }
 
-/* Remove Wufoo default list spacing */
+/* Reset Wufoo list spacing */
 .wufoo ul{ margin: 0; padding: 0; }
 .wufoo li{ list-style: none; margin: 0 0 14px; }
 
@@ -44,8 +46,8 @@
   color: var(--asu);
   font-size: 24px;
   font-weight: 800;
-  letter-spacing: .2px;
   margin: 0 0 6px;
+  letter-spacing: .2px;
 }
 .wufoo #header div{
   color: var(--muted);
@@ -61,6 +63,14 @@
   margin: 0 0 8px;
 }
 .wufoo .req{ color: #d64545; }
+
+/* Helper labels (First/Last, DD/MM/YYYY etc.) */
+.wufoo span > label,
+.wufoo .symbol,
+.wufoo .instruct{
+  color: var(--muted);
+  font-size: 12px;
+}
 
 /* Inputs / Selects / Textareas */
 .wufoo input.field,
@@ -81,7 +91,7 @@
   transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
 
-/* Selects look nicer */
+/* Selects */
 .wufoo select.field{
   padding-right: 38px;
   cursor: pointer;
@@ -94,31 +104,12 @@
   outline: none;
   border-color: var(--asu);
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(22,50,105,.16);
+  box-shadow: 0 0 0 4px var(--asu-16);
 }
 
-/* Small helper labels (First/Last, DD/MM/YYYY etc.) */
-.wufoo span > label,
-.wufoo .symbol,
-.wufoo .instruct,
-.wufoo #instruct1327{
-  color: var(--muted);
-  font-size: 12px;
-}
-
-/* Date fields a bit tighter */
-.wufoo .date input.field.text{
-  min-width: 70px;
-  width: 70px;
-  text-align: center;
-  padding: 10px 10px;
-  border-radius: 12px;
-}
-.wufoo .date .symbol{ padding: 0 6px; font-weight: 700; }
-
-/* Section headers (the grey blocks) */
+/* Section headers */
 .wufoo .section h3{
-  background: rgba(22,50,105,.06);
+  background: var(--asu-06);
   padding: 14px 14px;
   border-radius: 12px;
   color: var(--asu);
@@ -128,58 +119,141 @@
   margin: 6px 0 2px;
 }
 
-/* Checkbox / radio pill styling */
-.wufoo input.field.radio,
-.wufoo input.field.checkbox{
-  accent-color: var(--asu); /* modern browsers */
-}
-
-.wufoo label.choice{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #ffffff;
-  border: 1px solid rgba(22,50,105,.16);
-  border-radius: 12px;
-  padding: 10px 12px;
-  margin: 6px 10px 0 0;
-  cursor: pointer;
-  transition: background .15s ease, border-color .15s ease, transform .12s ease;
-}
-
-.wufoo label.choice:hover{
-  border-color: rgba(22,50,105,.35);
-  transform: translateY(-1px);
-}
-
-/* Selected state (input sits immediately before label in your markup) */
-.wufoo input[type="radio"]:checked + label.choice,
-.wufoo input[type="checkbox"]:checked + label.choice{
-  background: var(--asu-06);
-  border-color: rgba(22,50,105,.45);
-}
-
-/* Long checkbox rows (GED etc.) feel like cards */
-.wufoo .notStacked label.choice{
-  width: 100%;
-  margin-right: 0;
-}
-
 /* Textareas */
 .wufoo textarea{
   min-height: 160px;
   resize: vertical;
 }
 
-/* File upload (keep simple but cleaner) */
+/* File upload */
 .wufoo input[type="file"]{
+  width: 100%;
   border: 1px dashed rgba(22,50,105,.30);
   background: rgba(22,50,105,.04);
   padding: 12px;
   border-radius: 12px;
 }
 
-/* Submit button */
+/* =========================================
+   DATE FIELDS (DD/MM/YYYY stay on one line)
+   ========================================= */
+.wufoo li.date span,
+.wufoo li.date .symbol,
+.wufoo li.date [id^="cal"]{
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+.wufoo li.date span{ margin-right: 8px !important; }
+.wufoo li.date input{
+  width: 72px !important;
+  min-width: 72px !important;
+  text-align: center !important;
+}
+
+/* =========================================
+   RADIOS / CHECKBOXES as “Cards”
+   (No weird far-right alignment)
+   ========================================= */
+
+/* Hide native controls (we create our own indicator) */
+.wufoo input[type="radio"],
+.wufoo input[type="checkbox"]{
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* Default layout for all choice groups: 2-column grid */
+.wufoo fieldset > div{
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+  gap: 14px 18px !important;
+  margin-top: 10px !important;
+}
+
+/* Each option wrapper */
+.wufoo fieldset > div > span{
+  display: block !important;
+  margin: 0 !important;
+}
+
+/* Card label */
+.wufoo label.choice{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 56px !important;
+  width: 100% !important;
+
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(22,50,105,.18) !important;
+  background: #fff !important;
+
+  font-weight: 650 !important;
+  color: var(--asu) !important;
+
+  box-shadow: 0 8px 18px rgba(22,50,105,.06) !important;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+}
+
+/* Hover */
+.wufoo label.choice:hover{
+  transform: translateY(-1px) !important;
+  border-color: rgba(22,50,105,.35) !important;
+  box-shadow: 0 12px 24px rgba(22,50,105,.10) !important;
+  background: rgba(22,50,105,.03) !important;
+}
+
+/* Indicator (radio-style by default) */
+.wufoo label.choice::before{
+  content: "";
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(22,50,105,.35);
+  background: #fff;
+  margin-right: 12px;
+}
+
+/* Selected */
+.wufoo input[type="radio"]:checked + label.choice,
+.wufoo input[type="checkbox"]:checked + label.choice{
+  background: var(--asu-08) !important;
+  border-color: rgba(22,50,105,.55) !important;
+  box-shadow: 0 12px 26px rgba(22,50,105,.16) !important;
+}
+
+/* Checked indicator (radio) */
+.wufoo input[type="radio"]:checked + label.choice::before{
+  border-color: var(--asu);
+  box-shadow: inset 0 0 0 5px var(--asu);
+}
+
+/* Checkbox groups: make indicator square */
+.wufoo li.checkbox label.choice::before,
+.wufoo .checkbox label.choice::before{
+  border-radius: 6px;
+}
+
+/* Checked indicator (checkbox) */
+.wufoo input[type="checkbox"]:checked + label.choice::before{
+  border-color: var(--asu);
+  background: var(--asu);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* Long single checkbox rows (GED etc.) => 1 column */
+.wufoo .notStacked fieldset > div{
+  grid-template-columns: 1fr !important;
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
 .wufoo .buttons{
   margin-top: 10px;
   padding-top: 10px;
@@ -203,438 +277,50 @@
   filter: brightness(1.03);
 }
 
-/* Mobile */
-@media (max-width: 768px){
-  .wufoo{ padding: 18px 16px 12px; }
-  .wufoo #header h2{ font-size: 20px; }
-  .wufoo label.choice{ width: 100%; margin-right: 0; }
-  .wufoo .buttons input{ width: 100%; }
-}
-
 /* =========================================
-   FIX PACK: keep sub-fields on ONE LINE
-   + make radio/checkbox look normal
+   TARGETED OVERRIDES
+   - Gender (fo1li9 + fo1li1352): 2 side-by-side pills
+   - This Application is For (fo1li1598): 3 across
    ========================================= */
 
-/* 1) Stop sub-field helper labels from forcing new lines */
-.wufoo span > label{
-  display: inline !important;
-  margin: 0 !important;
-  font-size: 12px;
-  color: #51627a;
-}
-
-/* 2) DATE fields: keep DD / MM / YYYY on one line */
-.wufoo li.date span,
-.wufoo li.date .symbol,
-.wufoo li.date #cal22,
-.wufoo li.date #cal43,
-.wufoo li.date #cal44,
-.wufoo li.date #cal895,
-.wufoo li.date #cal896,
-.wufoo li.date #cal1103,
-.wufoo li.date #cal1104{
-  display: inline-block !important;
-  vertical-align: middle !important;
-}
-
-.wufoo li.date span{
-  margin-right: 8px !important;
-}
-
-.wufoo li.date input{
-  width: 72px !important;
-  min-width: 72px !important;
-  text-align: center;
-}
-
-/* 3) TIME fields: keep HH / MM / SS / AMPM on one line */
-.wufoo li.time span,
-.wufoo li.time select{
-  display: inline-block !important;
-  vertical-align: middle !important;
-}
-
-.wufoo li.time span{
-  margin-right: 8px !important;
-}
-
-.wufoo li.time input{
-  width: 72px !important;
-  min-width: 72px !important;
-  text-align: center;
-}
-
-/* 4) PHONE fields: keep phone parts on one line */
-.wufoo li.phone span{
-  display: inline-block !important;
-  vertical-align: middle !important;
-  margin-right: 10px !important;
-}
-.wufoo li.phone input{
-  width: 90px !important;
-  min-width: 90px !important;
-  text-align: center;
-}
-
-/* 5) CURRENCY fields: keep dollars + cents on one line */
-.wufoo li.money span,
-.wufoo li.money input{
-  display: inline-block !important;
-  vertical-align: middle !important;
-}
-.wufoo li.money input{
-  width: 120px !important;
-  min-width: 120px !important;
-}
-
-/* =========================================
-   RADIO/CHECKBOX: make them look like clean
-   left-aligned options (NOT far right)
-   ========================================= */
-
-/* Wufoo often wraps each option like: <span><input> <label class="choice">...</label></span> */
-.wufoo fieldset > div > span{
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  margin: 6px 10px 6px 0 !important;
-}
-
-/* Make the label pill (simple + consistent) */
-.wufoo label.choice{
-  display: inline-flex !important;
-  align-items: center !important;
-  padding: 10px 12px !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(22,50,105,.18) !important;
-  background: #fff !important;
-  cursor: pointer !important;
-  margin: 0 !important;
-}
-
-/* Selected state */
-.wufoo input[type="radio"]:checked + label.choice,
-.wufoo input[type="checkbox"]:checked + label.choice{
-  background: rgba(22,50,105,.06) !important;
-  border-color: rgba(22,50,105,.45) !important;
-}
-
-/* Make long checkbox lines not look weird */
-.wufoo .notStacked fieldset > div > span{
-  display: flex !important;
-  width: 100% !important;
-}
-.wufoo .notStacked label.choice{
-  width: 100% !important;
-}
-
-/* =========================================
-   MATRIX / LIKERT fields (the “radio far right” issue)
-   This forces them into a normal stacked list
-   ========================================= */
-
-/* Common Wufoo matrix/likert selectors */
-.wufoo table.likert,
-.wufoo table.likert tbody,
-.wufoo table.likert tr,
-.wufoo table.matrix,
-.wufoo table.matrix tbody,
-.wufoo table.matrix tr{
-  display: block !important;
-  width: 100% !important;
-}
-
-/* Each row becomes a flex row: label + option */
-.wufoo table.likert tr,
-.wufoo table.matrix tr{
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 14px !important;
-  padding: 10px 0 !important;
-  border-bottom: 1px solid rgba(22,50,105,.08) !important;
-}
-
-.wufoo table.likert td,
-.wufoo table.matrix td,
-.wufoo table.likert th,
-.wufoo table.matrix th{
-  display: block !important;
-  width: auto !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-/* Hide matrix header row if it’s making things ugly */
-.wufoo table.likert thead,
-.wufoo table.matrix thead{
-  display: none !important;
-}
-
-/* =========================================
-   CLEAN CHOICES: make radios/checkboxes
-   look like modern clickable cards
-   ========================================= */
-
-/* hide the tiny default dots/squares */
-.wufoo input[type="radio"],
-.wufoo input[type="checkbox"]{
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-}
-
-/* each choice row becomes a clean grid */
-.wufoo fieldset > div{
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
-  gap: 14px 18px !important;
-  margin-top: 10px !important;
-}
-
-/* each option wrapper */
-.wufoo fieldset > div > span{
-  display: block !important;
-  margin: 0 !important;
-}
-
-/* the label becomes the “button/card” */
-.wufoo label.choice{
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  min-height: 56px !important;
-  width: 100% !important;
-
-  padding: 14px 16px !important;
-  border-radius: 14px !important;
-  border: 1px solid rgba(22,50,105,.18) !important;
-  background: #fff !important;
-
-  font-weight: 650 !important;
-  color: #163269 !important;
-
-  box-shadow: 0 8px 18px rgba(22,50,105,.06) !important;
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
-}
-
-/* hover */
-.wufoo label.choice:hover{
-  transform: translateY(-1px) !important;
-  border-color: rgba(22,50,105,.35) !important;
-  box-shadow: 0 12px 24px rgba(22,50,105,.10) !important;
-  background: rgba(22,50,105,.03) !important;
-}
-
-/* selected state: when input is checked, style its label */
-.wufoo input[type="radio"]:checked + label.choice,
-.wufoo input[type="checkbox"]:checked + label.choice{
-  background: rgba(22,50,105,.08) !important;
-  border-color: rgba(22,50,105,.55) !important;
-  box-shadow: 0 12px 26px rgba(22,50,105,.16) !important;
-}
-
-/* add a custom indicator dot/square on the left */
-.wufoo label.choice::before{
-  content: "";
-  flex: 0 0 18px;
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;               /* default: radio dot */
-  border: 2px solid rgba(22,50,105,.35);
-  background: #fff;
-  margin-right: 12px;
-}
-
-/* checked indicator fill */
-.wufoo input[type="radio"]:checked + label.choice::before{
-  border-color: #163269;
-  box-shadow: inset 0 0 0 5px #163269;
-}
-
-/* if it's a checkbox group, make it square */
-.wufoo .checkbox label.choice::before,
-.wufoo li.checkbox label.choice::before{
-  border-radius: 6px;
-}
-
-/* checked square */
-.wufoo input[type="checkbox"]:checked + label.choice::before{
-  border-color: #163269;
-  background: #163269;
-  box-shadow: inset 0 0 0 3px #fff;
-}
-
-/* GED + long checkbox text should not be a tiny centered box */
-.wufoo .notStacked fieldset > div{
-  grid-template-columns: 1fr !important;
-}
-
-/* Mobile: stack to 1 column */
-@media (max-width: 760px){
-  .wufoo fieldset > div{
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* =====================================
-   GENDER RADIO FIX (Field9 + Field1352)
-   ===================================== */
-
-/* Hide native radio for these gender groups */
-.wufoo input[name="Field9"],
-.wufoo input[name="Field1352"]{
-  position: absolute !important;
-  opacity: 0 !important;
-}
-
-/* Base pill style */
-.wufoo input[name="Field9"] + label.choice,
-.wufoo input[name="Field1352"] + label.choice{
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-
-  min-width: 160px !important;
-  height: 56px !important;
-
-  padding: 0 18px !important;
-  border-radius: 14px !important;
-
-  border: 2px solid rgba(22,50,105,.25) !important;
-  background: #fff !important;
-
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  color: #163269 !important;
-
-  transition: all .15s ease !important;
-  margin-right: 22px !important;
-}
-
-/* Custom dot */
-.wufoo input[name="Field9"] + label.choice::before,
-.wufoo input[name="Field1352"] + label.choice::before{
-  content: "" !important;
-  width: 16px !important;
-  height: 16px !important;
-  border-radius: 999px !important;
-  border: 2px solid rgba(22,50,105,.35) !important;
-  background: #fff !important;
-  flex-shrink: 0 !important;
-}
-
-/* Checked pill */
-.wufoo input[name="Field9"]:checked + label.choice,
-.wufoo input[name="Field1352"]:checked + label.choice{
-  background: rgba(22,50,105,.08) !important;
-  border-color: #163269 !important;
-  box-shadow: 0 10px 22px rgba(22,50,105,.20) !important;
-}
-
-/* Checked dot */
-.wufoo input[name="Field9"]:checked + label.choice::before,
-.wufoo input[name="Field1352"]:checked + label.choice::before{
-  border-color: #163269 !important;
-  box-shadow: inset 0 0 0 5px #163269 !important;
-}
-
-/* Hover */
-.wufoo input[name="Field9"] + label.choice:hover,
-.wufoo input[name="Field1352"] + label.choice:hover{
-  border-color: rgba(22,50,105,.5) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* Mobile stack */
-@media (max-width: 600px){
-  .wufoo input[name="Field9"] + label.choice,
-  .wufoo input[name="Field1352"] + label.choice{
-    width: 100% !important;
-    margin-right: 0 !important;
-    margin-bottom: 12px !important;
-  }
-}
-
-/* =========================================
-   FIX: Keep Gender + "This Application is For"
-   options together (not pushed far right)
-   Targets: #fo1li9, #fo1li1352, #fo1li1598
-   ========================================= */
-
-
-
-/* 2) Stop Wufoo option wrappers from stretching */
-.wufoo #fo1li9 fieldset > div > span,
-.wufoo #fo1li1352 fieldset > div > span,
-.wufoo #fo1li1598 fieldset > div > span{
-  width: auto !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  float: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-
-.wufoo #fo1li1598 label.choice{
-  min-width: 200px !important;   /* Application is For pill width */
-  width: auto !important;
-}
-.wufoo #fo1li1598 fieldset > div{
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(180px, 1fr)) !important;
-  gap: 14px !important;
-}
-.wufoo #fo1li1598 fieldset > div > span{
-  width: 100% !important;
-  display: block !important;
-}
-.wufoo #fo1li1598 label.choice{
-  width: 100% !important;
-  min-width: 0 !important;
-}
-
-/* =========================================
-   FINAL FIX: Gender (fo1li9 + fo1li1352)
-   and "This Application is For" (fo1li1598)
-   ========================================= */
-
-/* --- GENDER: keep 2 pills together --- */
+/* Gender groups: override the default 2-col grid with flex */
 .wufoo #fo1li9 fieldset > div,
 .wufoo #fo1li1352 fieldset > div{
   display: flex !important;
   flex-wrap: wrap !important;
-  justify-content: flex-start !important;
   align-items: center !important;
+  justify-content: flex-start !important;
   gap: 14px !important;
 }
-
 .wufoo #fo1li9 fieldset > div > span,
 .wufoo #fo1li1352 fieldset > div > span{
   width: auto !important;
   display: inline-flex !important;
-  margin: 0 !important;
 }
 
-/* --- THIS APPLICATION IS FOR: force 3 across --- */
+/* This Application is For: force 3 columns */
 .wufoo #fo1li1598 fieldset > div{
   display: grid !important;
   grid-template-columns: repeat(3, minmax(160px, 1fr)) !important;
   gap: 14px !important;
-  justify-content: start !important;
 }
-
 .wufoo #fo1li1598 fieldset > div > span{
   width: 100% !important;
   display: block !important;
-  margin: 0 !important;
 }
-
 .wufoo #fo1li1598 label.choice{
   width: 100% !important;
-  min-width: 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .wufoo{ padding: 18px 16px 12px; }
+  .wufoo #header h2{ font-size: 20px; }
+
+  /* make all choice grids stack on mobile */
+  .wufoo fieldset > div{
+    grid-template-columns: 1fr !important;
+  }
+
+  .wufoo .buttons input{ width: 100%; }
 }
