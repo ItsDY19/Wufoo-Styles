@@ -302,204 +302,81 @@
 }
 
 /* =========================================
-   MOBILE FIXES - iPhone & All Mobile Devices
-   This targets everything under 820px (iPad mini and below)
+   MOBILE: STACK EVERYTHING (one per line)
+   Applies to iPhone + all phones/tablets
    ========================================= */
-@media (max-width: 820px) {
-  /* Container adjustments */
-  .wufoo { 
-    padding: 20px 16px; 
-    margin: 12px auto;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(22,50,105,0.08);
-  }
-  
-  .wufoo #header h2 { 
-    font-size: 22px; 
-  }
-  
-  .wufoo #header div { 
-    font-size: 13px; 
-  }
-  
-  /* COMPLETELY RESET ALL CHOICE LAYOUTS FOR MOBILE */
-  .wufoo li fieldset > div {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    width: 100% !important;
-  }
-  
-  /* Force every single option to be full width */
-  .wufoo li fieldset > div > span,
-  .wufoo li fieldset > div > .subfield,
-  .wufoo #fo1li9 fieldset > div > span,
-  .wufoo #fo1li1352 fieldset > div > span,
-  .wufoo #fo1li1598 fieldset > div > span,
-  .wufoo #fo1li1356 fieldset > div > span,
-  .wufoo li.notStacked fieldset > div > span,
-  .wufoo li.notStacked fieldset > div > .subfield {
-    flex: 1 1 100% !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-  
-  /* Make cards full width with better touch targets */
-  .wufoo label.choice {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 60px;
-    padding: 16px 18px;
-    font-size: 16px;
-  }
-  
-  /* Center text for Application For on mobile */
-  .wufoo #fo1li1598 label.choice {
-    justify-content: center;
-    text-align: center;
-  }
-  
-  /* Fix date fields on mobile */
-  .wufoo li.date span {
-    display: flex !important;
-    flex-wrap: wrap;
-    gap: 8px;
-    width: 100%;
-    margin-right: 0 !important;
-  }
-  
-  .wufoo li.date input {
-    width: calc(33.333% - 6px) !important;
-    min-width: 0 !important;
-    flex: 1 1 auto;
-  }
-  
-  /* Fix name fields (Given Name/Surname) on mobile */
-  .wufoo li.focused input.field,
-  .wufoo li.focused .field {
-    width: 100% !important;
-  }
-  
-  /* Better spacing for complex fields */
-  .wufoo li.complex fieldset > div {
-    flex-direction: column;
-  }
-  
-  /* Full width button */
-  .wufoo .buttons input { 
-    width: 100%; 
-    padding: 16px 20px;
-    font-size: 17px;
-  }
-}
+@media (max-width: 820px){
 
-/* =========================================
-   SMALL MOBILE (iPhone 15 Pro, iPhone 13/14/15 etc)
-   390px and below
-   ========================================= */
-@media (max-width: 390px) {
-  .wufoo { 
-    padding: 16px 14px; 
-    margin: 8px auto;
+  /* Container */
+  .wufoo{
+    padding: 18px 14px !important;
+    margin: 10px auto !important;
   }
-  
-  .wufoo #header h2 { 
-    font-size: 20px; 
-  }
-  
-  /* Make date fields stack vertically on very small screens */
-  .wufoo li.date input {
-    width: 100% !important;
-  }
-  
-  .wufoo li.date span {
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  /* Slightly smaller card padding */
-  .wufoo label.choice {
-    padding: 14px;
-    min-height: 56px;
-  }
-}
 
-/* =========================================
-   FIX FOR GENDER AND YES/NO QUESTIONS
-   These specifically need to stack vertically
-   ========================================= */
-@media (max-width: 820px) {
-  .wufoo #fo1li9 fieldset > div,
-  .wufoo #fo1li1352 fieldset > div,
-  .wufoo li.notStacked fieldset > div {
-    flex-direction: column !important;
-  }
-}
-
-/* =========================================
-   SIMPLE MOBILE STACK - One thing at a time, line by line
-   ========================================= */
-@media (max-width: 768px) {
-  /* Force EVERY fieldset div to stack vertically */
-  .wufoo li fieldset > div {
-    display: block !important;
-  }
-  
-  /* Force EVERY choice option to be full width and block level */
-  .wufoo li fieldset > div > span,
-  .wufoo li fieldset > div > .subfield {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    float: none !important;
-    clear: both !important;
-    margin: 0 0 12px 0 !important;
-  }
-  
-  /* Make each card take full width */
-  .wufoo label.choice {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-  
-  /* Date fields - one line at a time */
-  .wufoo li.date span {
-    display: block !important;
-  }
-  
-  .wufoo li.date input {
-    display: block !important;
-    width: 100% !important;
-    margin-bottom: 8px !important;
-  }
-  
-  /* Name fields - First name above Last name */
-  .wufoo li.complex fieldset > div {
-    display: block !important;
-  }
-  
-  .wufoo li.complex span {
-    display: block !important;
-    width: 100% !important;
-    margin-bottom: 12px !important;
-  }
-  
-  /* Kill any flex, grid, or inline behavior */
+  /* FORCE all rows/columns to become vertical */
+  .wufoo li,
+  .wufoo li > div,
+  .wufoo li fieldset,
   .wufoo li fieldset > div,
   .wufoo li.complex fieldset > div,
-  .wufoo li.notStacked fieldset > div,
-  .wufoo li.date fieldset > div,
-  .wufoo #fo1li9 fieldset > div,
-  .wufoo #fo1li1352 fieldset > div,
-  .wufoo #fo1li1598 fieldset > div,
-  .wufoo #fo1li1356 fieldset > div {
+  .wufoo li.date fieldset > div{
     display: block !important;
-    flex-direction: unset !important;
-    flex-wrap: unset !important;
-    gap: unset !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* FORCE every "subfield" (first/last, city/state, etc.) to be full width */
+  .wufoo li span,
+  .wufoo li .subfield{
+    display: block !important;
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 12px 0 !important;
+  }
+
+  /* IMPORTANT: undo your desktop "160px" cap on mobile */
+  .wufoo li fieldset > div > span,
+  .wufoo li fieldset > div > .subfield{
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  /* Inputs always full width */
+  .wufoo input.field,
+  .wufoo select.field,
+  .wufoo textarea.field,
+  .wufoo input[type="text"],
+  .wufoo input[type="email"],
+  .wufoo input[type="tel"],
+  .wufoo textarea{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Choice cards: stack, full width */
+  .wufoo label.choice{
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 56px !important;
+  }
+
+  /* Dates: stack (DD then MM then YYYY) */
+  .wufoo li.date span,
+  .wufoo li.date .symbol,
+  .wufoo li.date [id^="cal"]{
+    display: block !important;
+  }
+  .wufoo li.date input{
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 10px !important;
+    text-align: left !important;
+  }
+
+  /* Submit button full width */
+  .wufoo .buttons input{
+    width: 100% !important;
   }
 }
