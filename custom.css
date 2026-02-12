@@ -1,5 +1,5 @@
 /* =========================================
-   ASU Wufoo – Clean Modern Theme (No Redundancy)
+   ASU Wufoo – Clean Modern Theme (Safe + No Redundancy)
    Primary: #163269
    ========================================= */
 
@@ -16,10 +16,10 @@
   --bg: #ffffff;
 }
 
-/* Predictable sizing */
+/* Predictable sizing (safe) */
 .wufoo, .wufoo * { box-sizing: border-box; }
 
-/* Container Card */
+/* Container card */
 .wufoo{
   max-width: 920px;
   margin: 26px auto;
@@ -72,7 +72,7 @@
   font-size: 12px;
 }
 
-/* Inputs / Selects / Textareas */
+/* Inputs / selects / textareas */
 .wufoo input.field,
 .wufoo select.field,
 .wufoo textarea.field,
@@ -90,14 +90,10 @@
   line-height: 1.2;
   transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
-
-/* Selects */
 .wufoo select.field{
   padding-right: 38px;
   cursor: pointer;
 }
-
-/* Focus */
 .wufoo input.field:focus,
 .wufoo select.field:focus,
 .wufoo textarea:focus{
@@ -151,13 +147,31 @@
 }
 
 /* =========================================
-   RADIOS / CHECKBOXES as “Cards”
-   (No weird far-right alignment)
+   RADIO / CHECKBOX “CARDS”
+   SAFE: only target .li.radio and .li.checkbox
    ========================================= */
 
-/* Hide native controls (we create our own indicator) */
-.wufoo input[type="radio"],
-.wufoo input[type="checkbox"]{
+/* Layout for radio/checkbox option containers */
+.wufoo li.radio fieldset > div,
+.wufoo li.checkbox fieldset > div{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px 18px !important;
+  align-items: stretch !important;
+  margin-top: 10px !important;
+}
+
+/* Each option wrapper */
+.wufoo li.radio fieldset > div > span,
+.wufoo li.checkbox fieldset > div > span{
+  flex: 1 1 220px !important;
+  min-width: 160px !important;
+  margin: 0 !important;
+}
+
+/* Hide only the inputs inside radio/checkbox list items (do NOT hide globally) */
+.wufoo li.radio input[type="radio"],
+.wufoo li.checkbox input[type="checkbox"]{
   position: absolute !important;
   opacity: 0 !important;
   width: 1px !important;
@@ -165,27 +179,14 @@
   overflow: hidden !important;
 }
 
-/* Default layout for all choice groups: 2-column grid */
-.wufoo fieldset > div{
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
-  gap: 14px 18px !important;
-  margin-top: 10px !important;
-}
-
-/* Each option wrapper */
-.wufoo fieldset > div > span{
-  display: block !important;
-  margin: 0 !important;
-}
-
 /* Card label */
-.wufoo label.choice{
+.wufoo li.radio label.choice,
+.wufoo li.checkbox label.choice{
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  min-height: 56px !important;
   width: 100% !important;
+  min-height: 56px !important;
 
   padding: 14px 16px !important;
   border-radius: 14px !important;
@@ -200,15 +201,17 @@
 }
 
 /* Hover */
-.wufoo label.choice:hover{
+.wufoo li.radio label.choice:hover,
+.wufoo li.checkbox label.choice:hover{
   transform: translateY(-1px) !important;
   border-color: rgba(22,50,105,.35) !important;
   box-shadow: 0 12px 24px rgba(22,50,105,.10) !important;
   background: rgba(22,50,105,.03) !important;
 }
 
-/* Indicator (radio-style by default) */
-.wufoo label.choice::before{
+/* Indicator (radio default) */
+.wufoo li.radio label.choice::before,
+.wufoo li.checkbox label.choice::before{
   content: "";
   flex: 0 0 18px;
   width: 18px;
@@ -219,28 +222,25 @@
   margin-right: 12px;
 }
 
-/* Selected */
-.wufoo input[type="radio"]:checked + label.choice,
-.wufoo input[type="checkbox"]:checked + label.choice{
+/* Selected state */
+.wufoo li.radio input[type="radio"]:checked + label.choice,
+.wufoo li.checkbox input[type="checkbox"]:checked + label.choice{
   background: var(--asu-08) !important;
   border-color: rgba(22,50,105,.55) !important;
   box-shadow: 0 12px 26px rgba(22,50,105,.16) !important;
 }
 
 /* Checked indicator (radio) */
-.wufoo input[type="radio"]:checked + label.choice::before{
+.wufoo li.radio input[type="radio"]:checked + label.choice::before{
   border-color: var(--asu);
   box-shadow: inset 0 0 0 5px var(--asu);
 }
 
-/* Checkbox groups: make indicator square */
-.wufoo li.checkbox label.choice::before,
-.wufoo .checkbox label.choice::before{
-  border-radius: 6px;
-}
+/* Checkbox indicator shape */
+.wufoo li.checkbox label.choice::before{ border-radius: 6px; }
 
 /* Checked indicator (checkbox) */
-.wufoo input[type="checkbox"]:checked + label.choice::before{
+.wufoo li.checkbox input[type="checkbox"]:checked + label.choice::before{
   border-color: var(--asu);
   background: var(--asu);
   box-shadow: inset 0 0 0 3px #fff;
@@ -248,7 +248,35 @@
 
 /* Long single checkbox rows (GED etc.) => 1 column */
 .wufoo .notStacked fieldset > div{
-  grid-template-columns: 1fr !important;
+  display: flex !important;
+}
+.wufoo .notStacked fieldset > div > span{
+  flex: 1 1 100% !important;
+  min-width: 0 !important;
+}
+
+/* =========================================
+   Targeted layout overrides
+   ========================================= */
+
+/* Gender: exactly 2 pills */
+.wufoo #fo1li9 fieldset > div > span,
+.wufoo #fo1li1352 fieldset > div > span{
+  flex: 0 0 180px !important;
+}
+
+/* "This Application is For": 3 across on desktop */
+.wufoo #fo1li1598 fieldset > div > span{
+  flex: 1 1 calc(33.333% - 18px) !important;
+  min-width: 160px !important;
+}
+
+/* Make sure text wraps (prevents spill) */
+.wufoo #fo1li1598 label.choice{
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: normal !important;
+  word-break: break-word !important;
 }
 
 /* =========================================
@@ -278,167 +306,28 @@
 }
 
 /* =========================================
-   TARGETED OVERRIDES
-   - Gender (fo1li9 + fo1li1352): 2 side-by-side pills
-   - This Application is For (fo1li1598): 3 across
+   Mobile
    ========================================= */
-
-/* Gender groups: override the default 2-col grid with flex */
-.wufoo #fo1li9 fieldset > div,
-.wufoo #fo1li1352 fieldset > div{
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 14px !important;
-}
-.wufoo #fo1li9 fieldset > div > span,
-.wufoo #fo1li1352 fieldset > div > span{
-  width: auto !important;
-  display: inline-flex !important;
-}
-
-/* This Application is For: force 3 columns */
-.wufoo #fo1li1598 fieldset > div{
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(160px, 1fr)) !important;
-  gap: 14px !important;
-}
-.wufoo #fo1li1598 fieldset > div > span{
-  width: 100% !important;
-  display: block !important;
-}
-.wufoo #fo1li1598 label.choice{
-  width: 100% !important;
-}
-
-/* Mobile */
 @media (max-width: 768px){
   .wufoo{ padding: 18px 16px 12px; }
   .wufoo #header h2{ font-size: 20px; }
-
-  /* make all choice grids stack on mobile */
-  .wufoo fieldset > div{
-    grid-template-columns: 1fr !important;
-  }
-
   .wufoo .buttons input{ width: 100%; }
 }
 
-
-/* =========================================
-   RESPONSIVE FIX: Prevent "This Application is For"
-   spilling out on portrait/mobile
-   ========================================= */
-
-/* Always keep the choices inside the form */
-.wufoo,
-.wufoo form,
-.wufoo ul,
-.wufoo li,
-.wufoo fieldset,
-.wufoo fieldset > div{
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-}
-
-/* Make the "This Application is For" grid safe (no overflow) */
-.wufoo #fo1li1598 fieldset > div{
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* minmax(0,1fr) prevents spill */
-}
-
-/* Ensure each option stays inside the grid cell */
-.wufoo #fo1li1598 fieldset > div > span,
-.wufoo #fo1li1598 label.choice{
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-/* Allow the label text to wrap */
-.wufoo #fo1li1598 label.choice{
-  white-space: normal !important;
-  word-break: break-word !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-/* Tablet: 2 columns */
+/* Tablet: "Application is For" becomes 2 across */
 @media (max-width: 900px){
-  .wufoo #fo1li1598 fieldset > div{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  .wufoo #fo1li1598 fieldset > div > span{
+    flex: 1 1 calc(50% - 18px) !important;
   }
 }
 
-/* Phone portrait: 1 column (so you ALWAYS see Transfer) */
-@media (max-width: 600px), (orientation: portrait){
-  .wufoo #fo1li1598 fieldset > div{
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ===========================
-   PATCH: STOP SCROLLBARS + FIX SPILLING
-   (place at VERY BOTTOM)
-   =========================== */
-
-/* 1) Kill any accidental internal scrolling on Wufoo choice containers */
-.wufoo fieldset,
-.wufoo fieldset > div,
-.wufoo fieldset > div > span{
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-/* 2) ONLY style choice layouts for radio/checkbox list items (not every fieldset on the form) */
-.wufoo li.radio fieldset > div,
-.wufoo li.checkbox fieldset > div{
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 14px 18px !important;
-  align-items: stretch !important;
-}
-
-/* Each option wrapper becomes a flexible card */
-.wufoo li.radio fieldset > div > span,
-.wufoo li.checkbox fieldset > div > span{
-  display: block !important;
-  flex: 1 1 220px !important; /* auto-wrap */
-  min-width: 160px !important;
-}
-
-/* 3) Don’t hide EVERY radio/checkbox on the form — only hide the ones inside choice lists */
-.wufoo li.radio input[type="radio"],
-.wufoo li.checkbox input[type="checkbox"]{
-  position: absolute !important;
-  opacity: 0 !important;
-}
-
-/* Make labels the clickable cards */
-.wufoo li.radio label.choice,
-.wufoo li.checkbox label.choice{
-  width: 100% !important;
-  min-height: 56px !important;
-  box-sizing: border-box !important;
-}
-
-/* 4) “This Application is For” — force 3 cards across on desktop, wrap nicely */
-.wufoo #fo1li1598 fieldset > div > span{
-  flex: 1 1 calc(33.333% - 18px) !important;
-  min-width: 160px !important;
-}
-
-/* 5) Gender — keep it 2 across */
-.wufoo #fo1li9 fieldset > div > span,
-.wufoo #fo1li1352 fieldset > div > span{
-  flex: 0 0 180px !important;
-}
-
-/* 6) Mobile portrait — stack everything so nothing gets cut off */
+/* Phone portrait: stack everything so nothing gets cut off */
 @media (max-width: 600px){
   .wufoo #fo1li1598 fieldset > div > span,
   .wufoo #fo1li9 fieldset > div > span,
-  .wufoo #fo1li1352 fieldset > div > span{
+  .wufoo #fo1li1352 fieldset > div > span,
+  .wufoo li.radio fieldset > div > span,
+  .wufoo li.checkbox fieldset > div > span{
     flex: 1 1 100% !important;
     min-width: 0 !important;
   }
